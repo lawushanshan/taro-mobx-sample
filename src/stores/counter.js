@@ -1,5 +1,6 @@
 import { observable } from 'mobx'
 
+//可能变化的变量声明为observable
 const counterStore = observable({
   counter: 0
 })

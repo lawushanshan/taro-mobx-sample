@@ -2,13 +2,14 @@ import Taro, { Component } from '@tarojs/taro'
 import { Provider } from '@tarojs/mobx'
 import Index from './pages/index'
 
-import counterStore from './store/counter'
+import store from './stores'
 
 import './app.scss'
 
-const store = {
-  counterStore
-}
+//引入store存储
+// const store = {
+//   counterStore
+// }
 
 class App extends Component {
 
@@ -34,6 +35,7 @@ class App extends Component {
 
   // 在 App 类中的 render() 函数没有实际作用
   // 请勿修改此函数
+  // 导入所有store
   render () {
     return (
       <Provider store={store}>
