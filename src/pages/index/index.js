@@ -48,17 +48,28 @@ class Index extends Component {
 
   incrementAsync = () => {
     const { counterStore } = this.props
-    counterStore.incrementAsync()
+    counterStore.incrementAsync('',()=>{})
+  }
+
+
+  GetValue=()=>{
+    const { counterStore } =this.props
+    counterStore.getValuesAsync()
+    .then((data)=>{
+      console.log('Success');
+    })
   }
 
   render () {
-    const { counterStore: { counter } } = this.props
+    const { counterStore: { counter,apiValue } } = this.props
     return (
       <View className='index'>
         <Button onClick={this.increment}>+</Button>
         <Button onClick={this.decrement}>-</Button>
         <Button onClick={this.incrementAsync}>Add Async</Button>
         <Text>{counter}</Text>
+        <Button type='primary' onClick={this.GetValue}>GetValue</Button>
+        <Text>{apiValue}</Text>
       </View>
     )
   }

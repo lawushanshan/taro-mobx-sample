@@ -1,22 +1,45 @@
-import { observable } from 'mobx'
 
-//可能变化的变量声明为observable
-const counterStore = observable({
-  counter: 0
-})
+import Taro from '@tarojs/taro';
 
-counterStore.increment = function () {
-  this.counter++
-}
+import { observable, action } from 'mobx';
 
-counterStore.decrement = function() {
-  this.counter--
-}
+import valueApi from '../services/values';
 
-counterStore.incrementAsync = function() {
-  setTimeout(() => {
+class counterStore {
+  @observable counter = 0;
+  @observable apiValue = '暂无';
+
+  @action
+  increment () {
     this.counter++
-  }, 1000);
-}
+  }
 
-export default counterStore
+  @action
+  decrement() {
+    this.counter--
+  }
+
+  @action
+  async incrementAsync(parames,callback) {
+    setTimeout(() => {
+      this.counter++
+    }, 1000);
+    //回调函数存在就调用
+    callback&& callback()
+  }
+
+  @action
+  async getValuesAsync(){
+    try {
+      const result =await valueApi.getValue();
+      if (result) {
+        this.apiValue = result;
+      }
+    } catch (error) {
+
+    }
+
+  }
+}
+const counter=new counterStore();
+export default counter
