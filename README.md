@@ -1,2 +1,2 @@
 # taro-mobx-sample
-Taro mobx sample
+Taro with mobx and taro-async
